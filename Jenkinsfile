@@ -44,6 +44,14 @@ pipeline {
         }
     }
 }
+
+        stage ('Run Container'){
+            steps{
+                script {
+                    dockerImage.run("-p 8096:5000 --rm --name mypythonappContainer")
+                }
+            }
+}
 }
 }
     
