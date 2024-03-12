@@ -17,6 +17,14 @@ pipeline {
 
         }
 
+        stage('Check for Secrets')
+            steps {
+                sh 'rm trufflehog || true'
+                sh 'docker pull gesellix/trufflehog'
+                sh 'docker run -t gesellix/trufflehog --json https://github.com/Gumbeoketch/python-reverse-app.git > trufflehog'
+                sh 'cat trufflehog'
+            }
+
         stage('Build Docker Image'){
             steps {
                 script {
