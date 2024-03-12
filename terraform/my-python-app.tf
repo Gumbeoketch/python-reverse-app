@@ -10,7 +10,7 @@ resource "aws_instance" "python-app-instance" {
   key_name               = "takehome"
   vpc_security_group_ids = ["sg-0eb60e2c0d9692994"]
   tags = {
-    Name    = "Pthon-app-instance"
+    Name    = "python-app-instance"
     Project = "Take-Home-Test"
   }
 
