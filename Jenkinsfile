@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         dockerImage =''
-        registry = 'moketch/nano-image:tagname'
+        registry = 'moketch/nano-image'
         registryCredential ='dockerhub_id'
     }
 
