@@ -1,14 +1,17 @@
-# app.py
 from flask import Flask, request
-import socket
 
 app = Flask(__name__)
 
 @app.route('/')
-def get_ip():
+def get_reversed_ip():
+    # Get the IP address of the client making the request
     ip_address = request.remote_addr
-    reversed_ip = ".".join(ip_address.split(".")[::-1])
+    
+    # Reverse the IP address
+    reversed_ip = '.'.join(ip_address.split('.')[::-1])
+    
+    # Return the reversed IP address as the response
     return f"Reversed IP: {reversed_ip}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
