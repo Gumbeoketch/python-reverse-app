@@ -10,7 +10,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
+            steps{
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Gumbeoketch/python-reverse-app.git']])
                 
             }
@@ -18,7 +18,7 @@ pipeline {
         }
 
         stage('Check for Secrets'){
-            steps {
+            steps{
                 sh 'rm trufflehog || true'
                 sh 'docker pull gesellix/trufflehog'
                 sh 'docker run -t gesellix/trufflehog --json https://github.com/Gumbeoketch/python-reverse-app.git > trufflehog'
@@ -27,7 +27,7 @@ pipeline {
         }
 
         stage('Build Docker Image'){
-            steps {
+            steps{
                 script {
                     dockerImage = docker.build registry
                     
@@ -35,7 +35,7 @@ pipeline {
             }
         }
        stage ('Upload to Dockerhub'){
-        steps {
+        steps{
             script {
                     docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
