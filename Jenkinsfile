@@ -17,13 +17,14 @@ pipeline {
 
         }
 
-        stage('Check for Secrets')
+        stage('Check for Secrets'){
             steps {
                 sh 'rm trufflehog || true'
                 sh 'docker pull gesellix/trufflehog'
                 sh 'docker run -t gesellix/trufflehog --json https://github.com/Gumbeoketch/python-reverse-app.git > trufflehog'
                 sh 'cat trufflehog'
             }
+        }
 
         stage('Build Docker Image'){
             steps {
@@ -33,7 +34,7 @@ pipeline {
                 }
             }
         }
-       stage ('Upload to Dockerhub')
+       stage ('Upload to Dockerhub'){
         steps {
             script {
                     docker.withRegistry( '', registryCredential ) {
