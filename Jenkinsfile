@@ -2,6 +2,12 @@ pipeline {
 
     agent any
 
+    environment {
+        dockerImage =''
+        registry = 'moketch/image_name'
+        registryCredential ='dockerhub_id'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +16,23 @@ pipeline {
             }
 
         }
-            
+
+        stage('Build Docker Image'){
+            steps {
+                script {
+                    dockerImage = docker.build registry
+                    
+                }
+            }
+        }
+       stage ('Upload to Dockerhub')
+        steps {
+            script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                
+            }
+        }
     }
 }
     
