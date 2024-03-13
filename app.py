@@ -3,8 +3,8 @@ from flask import Flask, request #we use flask to build the app
 app = Flask(__name__)
 
 @app.route('/')
-def get_ip():
-    ip_address = request.remote_addr #picks the actual origin IP
+def get_ip(): #Captures the actual origin IP
+    ip_address = request.remote_addr 
     reversed_ip = ".".join(ip_address.split(".")[::-1])
     return f"Reversed IP: {reversed_ip}"
 
