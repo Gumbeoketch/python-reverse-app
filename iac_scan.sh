@@ -4,3 +4,4 @@
 pip3 install checkov
 checkov --directory terraform >scan.txt
 #iac scan output 
+#working???
